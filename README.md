@@ -46,5 +46,5 @@ muscle -align alpha.spike.fasta_protein.fas -output alpha.spike.fasta_protein.ms
 
 - <next step>
 ```
-
+hyphy post-msa.bf --protein-msa alpha.spike.fasta_protein.msa --nucleotide-sequences alpha.spike.fasta_nuc.fas --output alpha.fin.msa
 ```
