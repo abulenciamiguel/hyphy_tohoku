@@ -39,4 +39,12 @@ conda install -c bioconda bcftools
 hyphy pre-msa.bf --reference NC_045512.2.spike.fasta --input alpha.spike.fasta
 ```
 
--
+- Generate multiple sequence alignment of the spike protein sequence
+```
+muscle -align alpha.spike.fasta_protein.fas -output alpha.spike.fasta_protein.msa
+```
+
+- <next step>
+```
+
+```
