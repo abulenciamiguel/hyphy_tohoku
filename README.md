@@ -49,11 +49,13 @@ muscle -align alpha.spike.fasta_protein.fas -output alpha.spike.fasta_protein.ms
 hyphy post-msa.bf --protein-msa alpha.spike.fasta_protein.msa --nucleotide-sequences alpha.spike.fasta_nuc.fas --output alpha.fin.msa
 ```
 
+### 3. Phylogenetic tree construction: Maximum Likelihood method
 - Construct tree using maximum likelihood with `GTR` substitution model, `+I+G` invariable site plus discrete Gamma model, and `1000 bootstrapping`
 ```
 iqtree2 -s alpha.fin.msa -m GTR+I+G -T AUTO -B 1000
 ```
 
+### 4. Selection analysis
 - Test for lineage-specific evolution using the branch-site method `aBS-REL` or `Adaptive Branch-Site Random Effects Likelihood`
 ```
 hyphy absrel --alignment alpha.fin.msa --tree alpha.fin.msa.treefile
