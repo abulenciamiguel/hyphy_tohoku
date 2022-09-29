@@ -36,17 +36,17 @@ conda install -c bioconda bcftools
 ### 2. Codon-aware Multiple Sequence Alignment
 - Correct for frame-shift mutations
 ```
-hyphy pre-msa.bf --reference NC_045512.2.spike.fasta --input alpha.spike.fasta
+hyphy pre-msa.bf --reference NC_045512.2.spike.fasta --input alpha.spike.fasta CPU=10
 ```
 
 - Generate multiple sequence alignment of the spike protein sequence
 ```
-muscle -align alpha.spike.fasta_protein.fas -output alpha.spike.fasta_protein.msa
+muscle -align alpha.spike.fasta_protein.fas -output alpha.spike.fasta_protein.msa -threads 10
 ```
 
 - Generate corrected aligned nucleotide sequence of the spike gene 
 ```
-hyphy post-msa.bf --protein-msa alpha.spike.fasta_protein.msa --nucleotide-sequences alpha.spike.fasta_nuc.fas --output alpha.fin.msa
+hyphy post-msa.bf --protein-msa alpha.spike.fasta_protein.msa --nucleotide-sequences alpha.spike.fasta_nuc.fas --output alpha.fin.msa CPU=10
 ```
 
 ### 3. Phylogenetic tree construction: Maximum Likelihood method
