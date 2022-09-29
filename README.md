@@ -44,7 +44,17 @@ hyphy pre-msa.bf --reference NC_045512.2.spike.fasta --input alpha.spike.fasta
 muscle -align alpha.spike.fasta_protein.fas -output alpha.spike.fasta_protein.msa
 ```
 
-- <next step>
+- Generate corrected aligned nucleotide sequence of the spike gene 
 ```
 hyphy post-msa.bf --protein-msa alpha.spike.fasta_protein.msa --nucleotide-sequences alpha.spike.fasta_nuc.fas --output alpha.fin.msa
+```
+
+- Construct tree using maximum likelihood with `GTR` substitution model, `+I+G` invariable site plus discrete Gamma model, and `1000 bootstrapping`
+```
+iqtree2 -s alpha.fin.msa -m GTR+I+G -T AUTO -B 1000
+```
+
+- Run `aBSREL` analysis
+```
+hyphy absrel --alignment alpha.fin.msa --tree alpha.fin.msa.treefile
 ```
