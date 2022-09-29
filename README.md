@@ -21,7 +21,7 @@ conda install -c bioconda bcftools
   samtools faidx NC_045512.2.fasta NC_045512.2:21563-25384 > NC_045512.2.spike.fasta
   ```
 
-- Map the 14k sequences to the Spike gene sequence then sort and index
+- Map the sequences to the Spike gene sequence then sort and index
   ```
   minimap2 -ax asm5 NC_045512.2.spike.fasta alpha_550.fasta | samtools sort -o alpha.spike.sorted.bam
   
