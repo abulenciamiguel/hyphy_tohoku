@@ -54,7 +54,7 @@ hyphy post-msa.bf --protein-msa alpha.spike.fasta_protein.msa --nucleotide-seque
 iqtree2 -s alpha.fin.msa -m GTR+I+G -T AUTO -B 1000
 ```
 
-- Run `aBSREL` analysis
+- Test for lineage-specific evolution using the branch-site method `aBS-REL` or `Adaptive Branch-Site Random Effects Likelihood`
 ```
 hyphy absrel --alignment alpha.fin.msa --tree alpha.fin.msa.treefile
 ```
