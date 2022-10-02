@@ -56,7 +56,10 @@ iqtree2 -s alpha.fin.msa -m GTR+I+G -T AUTO -B 1000
 ```
 
 ### 4. Selection analysis
-- Test for lineage-specific evolution using the branch-site method `aBS-REL` or `Adaptive Branch-Site Random Effects Likelihood`
+- Test using `FUBAR` (Fast, Unconstrained Bayesian AppRoximation)
 ```
-hyphy absrel --alignment alpha.fin.msa --tree alpha.fin.msa.treefile CPU=10
+hyphy fubar --alignment alpha.fin.msa --tree alpha.fin.msa.treefile CPU=10
 ```
+
+### 5. Viewing of results using [Hyphy vision](http://vision.hyphy.org/FUBAR)
+- Upload/load the `alpha.fin.msa.FUBAR.json` file
