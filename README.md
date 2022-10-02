@@ -23,43 +23,43 @@ conda install -c bioconda bcftools
 
 - Map the sequences to the Spike gene sequence then sort and index
   ```
-  minimap2 -ax asm5 NC_045512.2.spike.fasta alpha_550.fasta | samtools sort -o alpha.spike.sorted.bam
+  minimap2 -ax asm5 NC_045512.2.spike.fasta combined.fasta | samtools sort -o combined.spike.sorted.bam
   
-  samtools index alpha.spike.sorted.bam
+  samtools index combined.spike.sorted.bam
   ```
 
 - Convert the `bam` file which contains the sequences aligned to the `Spike gene` into a `fasta` format
   ```
-  samtools fasta alpha.spike.sorted.bam > alpha.spike.fasta
+  samtools fasta combined.spike.sorted.bam > combined.spike.fasta
   ```
 
 ### 2. Codon-aware Multiple Sequence Alignment
 - Correct for frame-shift mutations
 ```
-hyphy pre-msa.bf --reference NC_045512.2.spike.fasta --input alpha.spike.fasta CPU=10
+hyphy pre-msa.bf --reference NC_045512.2.spike.fasta --input combined.spike.fasta CPU=10
 ```
 
 - Generate multiple sequence alignment of the spike protein sequence
 ```
-muscle -align alpha.spike.fasta_protein.fas -output alpha.spike.fasta_protein.msa -threads 10
+muscle -align combined.spike.fasta_protein.fas -output combined.spike.fasta_protein.msa -threads 10
 ```
 
 - Generate corrected aligned nucleotide sequence of the spike gene 
 ```
-hyphy post-msa.bf --protein-msa alpha.spike.fasta_protein.msa --nucleotide-sequences alpha.spike.fasta_nuc.fas --output alpha.fin.msa CPU=10
+hyphy post-msa.bf --protein-msa combined.spike.fasta_protein.msa --nucleotide-sequences combined.spike.fasta_nuc.fas --output combined.fin.msa CPU=10
 ```
 
 ### 3. Phylogenetic tree construction: Maximum Likelihood method
 - Construct tree using maximum likelihood with `GTR` substitution model, `+I+G` invariable site plus discrete Gamma model, and `1000 bootstrapping`
 ```
-iqtree2 -s alpha.fin.msa -m GTR+I+G -T AUTO -B 1000
+iqtree2 -s combined.fin.msa -m GTR+I+G -T AUTO -B 1000
 ```
 
 ### 4. Selection analysis
 - Test using `FUBAR` (Fast, Unconstrained Bayesian AppRoximation)
 ```
-hyphy fubar --alignment alpha.fin.msa --tree alpha.fin.msa.treefile CPU=10
+hyphy fubar --alignment combined.fin.msa --tree combined.fin.msa.treefile CPU=10
 ```
 
 ### 5. Viewing of results using [Hyphy vision](http://vision.hyphy.org/FUBAR)
-- Upload/load the `alpha.fin.msa.FUBAR.json` file
+- Upload/load the `combined.fin.msa.FUBAR.json` file
